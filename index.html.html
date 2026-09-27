@@ -1,0 +1,948 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#0F766E" />
+  <meta name="description" content="CozyLiving GH — premium bedsheets, duvets, curtains and towels delivered in Accra." />
+  <title>CozyLiving GH | Comfort & Luxury For Every Home</title>
+
+  <style>
+    :root{
+      --teal:#0F766E;--teal-dark:#0B5F59;--teal-light:#DDF3EF;
+      --cream:#FBF7EF;--brown:#3D2B20;--text:#2E2925;--muted:#746B63;
+      --white:#fff;--border:#E5DCCF;--shadow:0 18px 45px rgba(61,43,32,.10);
+    }
+    *{box-sizing:border-box;margin:0;padding:0}
+    html{scroll-behavior:smooth}
+    body{font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:var(--cream);color:var(--text);line-height:1.5}
+    body.cart-open{overflow:hidden}
+    button,input,select,textarea{font:inherit}
+    a{text-decoration:none;color:inherit}
+    img{display:block;width:100%;object-fit:cover}
+
+    .announcement{background:var(--teal);color:#fff;text-align:center;padding:9px 16px;font-size:13px;font-weight:700}
+    header{position:sticky;top:0;z-index:50;background:rgba(251,247,239,.94);backdrop-filter:blur(14px);border-bottom:1px solid rgba(61,43,32,.08)}
+    .nav{max-width:1180px;margin:auto;min-height:78px;display:flex;align-items:center;justify-content:space-between;gap:25px;padding:12px 22px}
+    .brand{display:flex;align-items:center;gap:11px}
+    .brand-mark{width:42px;height:42px;border-radius:13px;background:var(--teal);color:#fff;display:grid;place-items:center;font-size:21px;box-shadow:0 8px 20px rgba(15,118,110,.20)}
+    .brand-name{font-family:Georgia,serif;font-size:22px;font-weight:700;color:var(--brown)}
+    .brand-name span{color:var(--teal)}
+    .nav-links{display:flex;gap:28px;font-size:14px;font-weight:700;color:#5C5148}
+    .nav-links a:hover{color:var(--teal)}
+    .nav-actions{display:flex;align-items:center;gap:10px}
+    .icon-btn{width:42px;height:42px;border:1px solid var(--border);background:#fff;border-radius:50%;display:grid;place-items:center;cursor:pointer;color:var(--brown);position:relative}
+    .cart-count{position:absolute;right:-3px;top:-3px;width:18px;height:18px;border-radius:50%;background:var(--teal);color:#fff;font-size:10px;display:grid;place-items:center;font-weight:800}
+    .menu-btn{display:none}
+    .container{max-width:1180px;margin:auto;padding:0 22px}
+
+    .hero{padding:25px 0 15px}
+    .hero-card{min-height:410px;border-radius:28px;overflow:hidden;position:relative;display:flex;align-items:flex-end;background:#d9cfc1;box-shadow:var(--shadow);isolation:isolate}
+    .hero-card::before{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(29,23,18,.78),rgba(29,23,18,.42) 42%,rgba(29,23,18,.05) 75%),url("https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?auto=format&fit=crop&w=1800&q=85") center/cover;z-index:-2}
+    .hero-card::after{content:"";position:absolute;inset:0;background:linear-gradient(0deg,rgba(0,0,0,.35),transparent 50%);z-index:-1}
+    .hero-content{color:#fff;max-width:650px;padding:48px 55px}
+    .eyebrow{display:inline-flex;align-items:center;gap:8px;padding:8px 13px;border-radius:999px;background:rgba(255,255,255,.16);border:1px solid rgba(255,255,255,.26);backdrop-filter:blur(8px);font-size:12px;font-weight:800;letter-spacing:.4px;text-transform:uppercase;margin-bottom:18px}
+    .hero h1{font-family:Georgia,serif;font-size:clamp(36px,4.4vw,58px);line-height:1.02;letter-spacing:-1.8px;margin-bottom:18px}
+    .hero h1 span{color:#76D8CE}
+    .hero p{font-size:17px;max-width:560px;color:rgba(255,255,255,.88);margin-bottom:28px}
+    .hero-buttons{display:flex;gap:12px;flex-wrap:wrap}
+    .btn{border:0;border-radius:13px;padding:14px 20px;font-weight:800;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;gap:9px;transition:.2s}
+    .btn:hover{transform:translateY(-2px)}
+    .btn-primary{background:var(--teal);color:#fff;box-shadow:0 12px 28px rgba(15,118,110,.28)}
+    .btn-primary:hover{background:var(--teal-dark)}
+    .btn-light{background:#fff;color:var(--brown)}
+    .hero-note{font-size:12px;margin-top:15px;color:rgba(255,255,255,.72)}
+
+    .categories{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin:22px 0 55px}
+    .category{border:1px solid var(--border);background:#fff;border-radius:16px;padding:16px 14px;display:flex;align-items:center;justify-content:center;gap:9px;font-weight:800;color:var(--brown);cursor:pointer;transition:.2s}
+    .category:hover,.category.active{background:var(--teal);color:#fff;border-color:var(--teal);transform:translateY(-2px)}
+
+    .section-head{display:flex;justify-content:space-between;align-items:end;gap:20px;margin-bottom:20px}
+    .section-kicker{color:var(--teal);font-size:12px;font-weight:900;text-transform:uppercase;letter-spacing:1.3px}
+    .section-title{font-family:Georgia,serif;font-size:34px;line-height:1.1;color:var(--brown);margin-top:4px}
+    .see-all{font-weight:800;color:var(--teal);font-size:14px}
+
+    /* JUMIA-STYLE PRODUCT GRID */
+    .products{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px}
+    .product{background:#fff;border:1px solid #eee3d7;border-radius:14px;overflow:hidden;transition:.2s;position:relative;min-width:0}
+    .product:hover{transform:translateY(-4px);box-shadow:0 12px 30px rgba(61,43,32,.12)}
+    .product-image{height:245px;position:relative;background:#eee}
+    .product-image img{height:100%}
+    .tag{position:absolute;top:10px;left:10px;background:rgba(255,255,255,.94);color:var(--teal);border-radius:999px;padding:5px 8px;font-size:10px;font-weight:900}
+    .heart{position:absolute;right:10px;top:10px;width:35px;height:35px;border-radius:50%;border:0;background:rgba(255,255,255,.94);cursor:pointer;font-size:17px}
+    .product-body{padding:13px}
+    .product-cat{font-size:10px;color:var(--teal);font-weight:900;text-transform:uppercase;letter-spacing:.6px}
+    .product h3{font-size:15px;margin:5px 0 7px;color:var(--brown);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+    .stars{font-size:12px;color:#D79A21}
+    .rating{font-size:11px;color:var(--muted);margin-left:4px}
+    .product-bottom{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-top:13px}
+    .price{font-size:17px;font-weight:900;color:var(--brown)}
+    .order-mini{border:0;background:var(--teal-light);color:var(--teal);padding:9px 11px;border-radius:10px;font-size:11px;font-weight:900;cursor:pointer}
+    .order-mini:hover{background:var(--teal);color:#fff}
+    .no-products{grid-column:1/-1;background:#fff;border:1px solid var(--border);border-radius:18px;padding:35px;text-align:center;color:var(--muted)}
+
+    .trust{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:55px 0}
+    .trust-card{background:#fff;border:1px solid var(--border);border-radius:18px;padding:19px;display:flex;align-items:center;gap:13px}
+    .trust-icon{width:45px;height:45px;border-radius:14px;background:var(--teal-light);color:var(--teal);display:grid;place-items:center;font-size:21px;flex:none}
+    .trust-card strong{display:block;font-size:14px;color:var(--brown)}
+    .trust-card span{display:block;font-size:12px;color:var(--muted);margin-top:2px}
+
+    .story{display:grid;grid-template-columns:1fr 1fr;gap:45px;align-items:center;margin:15px 0 70px}
+    .story-image{height:440px;border-radius:25px;overflow:hidden;box-shadow:var(--shadow)}
+    .story-image img{height:100%}
+    .story h2{font-family:Georgia,serif;font-size:42px;line-height:1.08;color:var(--brown);margin:8px 0 16px}
+    .story p{color:var(--muted);font-size:15px;margin-bottom:20px}
+    .check-list{display:grid;gap:11px;margin:20px 0 27px}
+    .check{display:flex;gap:10px;font-weight:700;font-size:14px}
+    .check b{color:var(--teal)}
+
+    .cta{border-radius:25px;background:linear-gradient(120deg,var(--teal-dark),var(--teal));color:#fff;padding:45px;display:flex;justify-content:space-between;align-items:center;gap:25px;margin-bottom:65px;box-shadow:0 20px 50px rgba(15,118,110,.20)}
+    .cta h2{font-family:Georgia,serif;font-size:35px;line-height:1.1}
+    .cta p{color:rgba(255,255,255,.82);margin-top:7px}
+    .cta .btn{background:#fff;color:var(--teal)}
+
+    footer{background:#2A2420;color:#ddd;padding:45px 0 25px}
+    .footer-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:35px}
+    footer h3{font-family:Georgia,serif;color:#fff;font-size:22px;margin-bottom:10px}
+    footer p,footer a{font-size:13px;color:#bdb6af}
+    footer a:hover{color:#fff}
+    .footer-links{display:grid;gap:7px}
+    .copyright{border-top:1px solid rgba(255,255,255,.1);margin-top:30px;padding-top:18px;font-size:11px;color:#9e9892}
+
+    .floating-wa{border:0;cursor:pointer;position:fixed;right:18px;bottom:18px;z-index:60;background:#25D366;color:#fff;padding:14px 18px;border-radius:999px;font-weight:900;font-size:13px;box-shadow:0 15px 35px rgba(0,0,0,.20);display:flex;align-items:center;gap:9px}
+    .toast{position:fixed;left:50%;bottom:25px;transform:translate(-50%,120px);background:#222;color:#fff;padding:12px 17px;border-radius:12px;font-size:13px;font-weight:700;z-index:100;transition:.25s}
+    .toast.show{transform:translate(-50%,0)}
+
+    .cart-overlay{position:fixed;inset:0;background:rgba(0,0,0,.38);z-index:80;opacity:0;pointer-events:none;transition:.25s}
+    .cart-overlay.show{opacity:1;pointer-events:auto}
+    .cart-drawer{position:fixed;top:0;right:0;width:min(430px,100%);height:100dvh;background:#fff;z-index:90;transform:translateX(105%);transition:.3s;display:flex;flex-direction:column;box-shadow:-20px 0 50px rgba(0,0,0,.18)}
+    .cart-drawer.show{transform:translateX(0)}
+    .cart-head{padding:20px;border-bottom:1px solid var(--border);display:flex;justify-content:space-between;align-items:center}
+    .cart-head h2{font-family:Georgia,serif;color:var(--brown)}
+    .close-cart{border:0;background:#f5f1eb;width:38px;height:38px;border-radius:50%;cursor:pointer}
+    .cart-items{flex:1;overflow:auto;padding:16px}
+    .cart-item{border:1px solid var(--border);border-radius:15px;padding:12px;margin-bottom:10px}
+    .cart-item-top{display:flex;gap:10px}
+    .cart-item img{width:70px;height:70px;border-radius:10px;flex:none}
+    .cart-item h4{font-size:14px;color:var(--brown)}
+    .cart-meta{font-size:11px;color:var(--muted);margin-top:3px}
+    .qty-row{display:flex;align-items:center;justify-content:space-between;margin-top:9px;gap:8px}
+    .qty-controls{display:flex;align-items:center;border:1px solid var(--border);border-radius:9px;overflow:hidden}
+    .qty-controls button{border:0;background:#f8f5ef;width:30px;height:30px;cursor:pointer}
+    .qty-controls span{width:30px;text-align:center;font-size:12px;font-weight:800}
+    .remove-item{border:0;background:transparent;color:#b24b42;font-size:11px;cursor:pointer}
+    .cart-foot{border-top:1px solid var(--border);padding:18px;background:#fff}
+    .total-row{display:flex;justify-content:space-between;font-size:19px;font-weight:900;color:var(--brown);margin-bottom:13px}
+    .checkout-btn{width:100%}
+    .empty-cart{text-align:center;padding:45px 15px;color:var(--muted)}
+
+    .modal{position:fixed;inset:0;background:rgba(0,0,0,.45);z-index:100;display:none;align-items:center;justify-content:center;padding:18px}
+    .modal.show{display:flex}
+    .modal-card{background:#fff;width:min(520px,100%);max-height:90dvh;overflow:auto;border-radius:22px;padding:22px;box-shadow:0 25px 70px rgba(0,0,0,.25)}
+    .modal-head{display:flex;justify-content:space-between;gap:15px;align-items:center;margin-bottom:15px}
+    .modal-head h3{font-family:Georgia,serif;color:var(--brown);font-size:25px}
+    .form-grid{display:grid;grid-template-columns:1fr 1fr;gap:11px}
+    .form-field{margin-bottom:11px}
+    .form-field.full{grid-column:1/-1}
+    .form-field label{display:block;font-size:11px;font-weight:800;color:var(--brown);margin-bottom:5px}
+    .form-field input,.form-field select,.form-field textarea{width:100%;border:1px solid var(--border);border-radius:11px;padding:11px;outline:none;background:#fff;color:var(--text)}
+    .form-field textarea{min-height:75px;resize:vertical}
+    .selected-product{background:var(--teal-light);padding:10px 12px;border-radius:12px;font-size:12px;margin-bottom:14px}
+    .cart-checkout-note{font-size:11px;color:var(--muted);margin-top:8px;text-align:center}
+
+    .mobile-menu{position:fixed;top:68px;left:12px;right:12px;background:#fff;z-index:55;border:1px solid var(--border);border-radius:15px;box-shadow:var(--shadow);display:none;padding:10px}
+    .mobile-menu.show{display:grid}
+    .mobile-menu a{padding:12px;border-radius:9px;font-weight:800}
+    .mobile-menu a:hover{background:var(--teal-light);color:var(--teal)}
+
+    @media(max-width:900px){
+      .nav-links{display:none}.menu-btn{display:grid}
+      .products{grid-template-columns:repeat(3,minmax(0,1fr))}
+      .product-image{height:220px}
+      .story{grid-template-columns:1fr}.story-image{height:350px}
+      .footer-grid{grid-template-columns:1fr 1fr}
+    }
+    @media(max-width:650px){
+      .announcement{font-size:11px}
+      .nav{min-height:68px;padding:10px 15px}
+      .brand-name{font-size:18px}.brand-mark{width:37px;height:37px}.icon-btn{width:38px;height:38px}
+      .hero{padding-top:12px}.hero-card{min-height:390px;border-radius:20px}
+      .hero-card::before{background:linear-gradient(0deg,rgba(20,18,15,.82),rgba(20,18,15,.35) 55%,rgba(20,18,15,.08)),url("https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?auto=format&fit=crop&w=1200&q=85") center/cover}
+      .hero-content{padding:27px 22px}.hero h1{font-size:39px}.hero p{font-size:13px;margin-bottom:18px}.hero-note{font-size:10px}
+      .categories{grid-template-columns:repeat(2,1fr);margin-bottom:42px}.category{font-size:13px;padding:13px 8px}
+      .section-title{font-size:29px}
+      .products{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+      .product-image{height:190px}.product-body{padding:10px}.product h3{font-size:13px}
+      .price{font-size:15px}.order-mini{padding:8px;font-size:10px}
+      .trust{grid-template-columns:1fr;margin:42px 0}.story h2{font-size:34px}.story-image{height:290px}
+      .cta{padding:30px 24px;display:block}.cta h2{font-size:29px}.cta .btn{margin-top:18px;width:100%}
+      .footer-grid{grid-template-columns:1fr}.floating-wa{left:15px;right:15px;bottom:14px;justify-content:center}
+      .form-grid{grid-template-columns:1fr}.form-field.full{grid-column:auto}.cart-drawer{width:100%}
+    }
+
+
+    /* ADMIN IMAGE UPLOAD */
+    .image-upload-box{border:1px dashed var(--border);border-radius:14px;padding:12px;background:#faf8f5}
+    .image-upload-row{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+    .image-upload-btn{display:inline-flex;align-items:center;justify-content:center;gap:6px;background:var(--teal);color:#fff;border:0;border-radius:10px;padding:11px 14px;font-weight:800;cursor:pointer}
+    .image-upload-clear{background:#f5f1eb;color:var(--brown);border:0;border-radius:10px;padding:11px 14px;font-weight:800;cursor:pointer}
+    .image-upload-help{font-size:11px;color:var(--muted);margin-top:7px;line-height:1.45}
+    .image-preview{display:none;margin-top:10px;width:100%;max-height:190px;object-fit:cover;border-radius:12px;border:1px solid var(--border);background:#fff}
+    .image-preview.show{display:block}
+
+    /* ADMIN DASHBOARD */
+    .admin-modal{position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:200;display:none;align-items:center;justify-content:center;padding:14px}
+    .admin-modal.show{display:flex}
+    .admin-card{background:#fff;width:min(1050px,100%);max-height:94dvh;overflow:auto;border-radius:24px;box-shadow:0 30px 90px rgba(0,0,0,.30)}
+    .admin-head{position:sticky;top:0;z-index:2;background:#fff;border-bottom:1px solid var(--border);padding:18px 20px;display:flex;align-items:center;justify-content:space-between;gap:12px}
+    .admin-head h2{font-family:Georgia,serif;color:var(--brown)}
+    .admin-head small{display:block;color:var(--muted);font:11px Inter,sans-serif;margin-top:2px}
+    .admin-body{padding:20px}
+    .admin-toolbar{display:flex;gap:9px;flex-wrap:wrap;margin-bottom:18px}
+    .admin-toolbar .btn{padding:11px 14px;font-size:12px}
+    .admin-grid{display:grid;grid-template-columns:1fr 1.3fr;gap:18px}
+    .admin-panel{border:1px solid var(--border);border-radius:18px;padding:17px;background:#fff}
+    .admin-panel h3{font-family:Georgia,serif;color:var(--brown);margin-bottom:13px}
+    .admin-products{display:grid;gap:10px;max-height:560px;overflow:auto}
+    .admin-product{border:1px solid var(--border);border-radius:14px;padding:11px;display:flex;gap:11px;align-items:center}
+    .admin-product img{width:58px;height:58px;border-radius:10px;flex:none}
+    .admin-product-info{min-width:0;flex:1}
+    .admin-product-info strong{display:block;font-size:13px;color:var(--brown);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+    .admin-product-info span{font-size:11px;color:var(--muted)}
+    .admin-product-actions{display:flex;gap:6px}
+    .admin-product-actions button{border:0;border-radius:9px;padding:8px 9px;cursor:pointer;font-size:11px;font-weight:800}
+    .edit-btn{background:var(--teal-light);color:var(--teal)}
+    .delete-btn{background:#fff0ee;color:#a43d35}
+    .admin-form-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+    .admin-field{margin-bottom:10px}
+    .admin-field.full{grid-column:1/-1}
+    .admin-field label{display:block;font-size:11px;font-weight:800;color:var(--brown);margin-bottom:5px}
+    .admin-field input,.admin-field select,.admin-field textarea{width:100%;border:1px solid var(--border);border-radius:10px;padding:10px;outline:none}
+    .admin-field textarea{min-height:70px;resize:vertical}
+    .admin-check{display:flex;align-items:center;gap:8px;font-size:12px;font-weight:800;color:var(--brown);margin:4px 0 12px}
+    .admin-check input{width:17px;height:17px}
+    .size-editor{background:#faf7f1;border:1px solid var(--border);border-radius:12px;padding:10px}
+    .admin-sizes-list{display:flex;flex-wrap:wrap;gap:7px;margin-bottom:9px;min-height:34px}
+    .admin-size-chip{display:inline-flex;align-items:center;gap:6px;background:#fff;border:1px solid #d9cec0;color:var(--brown);border-radius:999px;padding:7px 9px;font-size:12px;font-weight:800}
+    .admin-size-chip button{border:0;background:transparent;color:#a43d35;cursor:pointer;font-weight:900;font-size:14px;line-height:1;padding:0}
+    .size-add-row{display:grid;grid-template-columns:1fr auto;gap:7px}
+    .size-add-row input{min-width:0}
+    .size-add-btn{background:var(--teal-light);color:var(--teal);padding:9px 12px!important;font-size:11px!important}
+    .size-help{display:block;color:var(--muted);font-size:10px;margin-top:7px}
+    .customer-size-note{font-size:10px;color:var(--muted);margin-top:5px}
+
+    .admin-note{background:var(--teal-light);color:var(--teal);border-radius:12px;padding:11px;font-size:11px;line-height:1.5;margin-bottom:13px}
+    .admin-login{background:#fff;width:min(390px,100%);border-radius:22px;padding:24px;box-shadow:0 25px 70px rgba(0,0,0,.25)}
+    .admin-login h3{font-family:Georgia,serif;font-size:26px;color:var(--brown);margin-bottom:6px}
+    .admin-login p{font-size:12px;color:var(--muted);margin-bottom:17px}
+    .admin-login input{width:100%;padding:13px;border:1px solid var(--border);border-radius:11px;margin-bottom:10px;outline:none}
+    .admin-stat{display:flex;gap:9px;flex-wrap:wrap;margin-bottom:15px}
+    .admin-stat div{background:#faf7f1;border:1px solid var(--border);border-radius:12px;padding:10px 13px;font-size:11px;color:var(--muted)}
+    .admin-stat b{color:var(--brown);font-size:16px;display:block}
+    .sale-price{color:#c7473f;font-size:17px;font-weight:900}
+    .old-price{text-decoration:line-through;color:#999;font-size:12px;margin-right:6px}
+    .sale-badge{position:absolute;top:10px;right:10px;background:#d94841;color:#fff;border-radius:7px;padding:5px 7px;font-size:10px;font-weight:900}
+    @media(max-width:800px){.admin-grid{grid-template-columns:1fr}.admin-products{max-height:none}}
+    @media(max-width:500px){.admin-body{padding:13px}.admin-form-grid{grid-template-columns:1fr}.admin-field.full{grid-column:auto}.admin-head{padding:15px}}
+
+
+    /* Mobile-first admin dashboard refinements */
+    @media(max-width:760px){
+      .admin-modal{padding:0;align-items:stretch}
+      .admin-card{width:100%;height:100dvh;max-height:100dvh;border-radius:0;display:flex;flex-direction:column}
+      .admin-head{padding:12px 14px}
+      .admin-body{overflow:auto;padding:14px}
+      .admin-toolbar{display:grid;grid-template-columns:repeat(2,minmax(0,1fr))}
+      .admin-toolbar .btn{width:100%;min-height:44px;padding:10px 7px;font-size:12px}
+      .admin-stat{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:7px}
+      .admin-stat div{padding:9px 6px;text-align:center;font-size:10px}
+      .admin-stat b{font-size:15px}
+      .admin-grid{grid-template-columns:1fr;gap:12px}
+      .admin-panel{padding:13px;min-width:0}
+      .admin-products{max-height:34dvh;overflow:auto}
+      .admin-product{align-items:flex-start;flex-wrap:wrap}
+      .admin-product-info{min-width:calc(100% - 75px)}
+      .admin-product-actions{width:100%;justify-content:flex-end}
+      .admin-product-actions button{min-height:38px;padding:9px 14px}
+      .admin-form-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+      .admin-field input,.admin-field select,.admin-field textarea{font-size:16px;min-height:43px}
+      .admin-field.full{grid-column:1/-1}
+      .admin-form-actions{display:grid!important;grid-template-columns:1fr 1fr}
+      .admin-form-actions .btn{min-height:44px}
+    }
+    @media(max-width:420px){
+      .admin-toolbar{gap:7px}
+      .admin-form-grid{grid-template-columns:1fr}
+      .admin-field.full{grid-column:auto}
+      .admin-stat{grid-template-columns:1fr 1fr}
+      .admin-stat div:last-child{grid-column:1/-1}
+      .admin-product img{width:48px;height:48px}
+      .admin-product-info{min-width:calc(100% - 62px)}
+      .admin-head h2{font-size:18px}
+      .admin-head small{font-size:10px}
+    }
+    @media(max-width:380px){
+      .products{gap:7px}.product-image{height:155px}
+      .product-bottom{align-items:flex-start;flex-direction:column}
+      .order-mini{width:100%}.hero h1{font-size:34px}
+    }
+    button:focus-visible,a:focus-visible{outline:3px solid #2a9d92;outline-offset:3px}
+
+  </style>
+</head>
+
+<body>
+  <div class="announcement">🚚 Delivery available in Accra &nbsp; • &nbsp; Soft • Durable • Affordable</div>
+
+  <header>
+    <nav class="nav">
+      <a href="#home" class="brand">
+        <div class="brand-mark">⌂</div><div class="brand-name">CozyLiving <span>GH</span></div>
+      </a>
+      <div class="nav-links">
+        <a href="#home">Home</a><a href="#shop">Shop</a><a href="#about">About</a><a href="#contact">Contact</a>
+      </div>
+      <div class="nav-actions">
+        <button class="icon-btn" aria-label="Search" onclick="document.getElementById('search').focus()">⌕</button>
+        <button class="icon-btn" aria-label="Cart" onclick="openCart()">🛒<span class="cart-count" id="cartCount">0</span></button>
+        <button class="icon-btn menu-btn" aria-label="Menu" onclick="toggleMobileMenu()">☰</button>
+      </div>
+    </nav>
+  </header>
+
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="#home" onclick="toggleMobileMenu()">Home</a><a href="#shop" onclick="toggleMobileMenu()">Shop</a>
+    <a href="#about" onclick="toggleMobileMenu()">About</a><a href="#contact" onclick="toggleMobileMenu()">Contact</a>
+  </div>
+
+  <div class="cart-overlay" id="cartOverlay" onclick="closeCart()"></div>
+  <aside class="cart-drawer" id="cartDrawer" aria-label="Shopping cart">
+    <div class="cart-head"><h2>Your Cart <span id="cartTitleCount">(0)</span></h2><button class="close-cart" onclick="closeCart()">✕</button></div>
+    <div class="cart-items" id="cartItems"></div>
+    <div class="cart-foot">
+      <div class="total-row"><span>Total</span><span id="cartTotal">GHS 0</span></div>
+      <button class="btn btn-primary checkout-btn" onclick="openCheckout()">Checkout on WhatsApp →</button>
+      <div class="cart-checkout-note">You will review your details before WhatsApp opens.</div>
+    </div>
+  </aside>
+
+  <div class="modal" id="productModal">
+    <div class="modal-card">
+      <div class="modal-head"><h3>Add to Cart</h3><button class="close-cart" onclick="closeProductModal()">✕</button></div>
+      <div class="selected-product" id="selectedProduct"></div>
+      <div class="form-grid">
+        <div class="form-field"><label>Quantity</label><input id="optQty" type="number" min="1" value="1"></div>
+        <div class="form-field"><label>Size</label><select id="optSize"><option value="">Select size</option></select></div>
+        <div class="form-field"><label>Colour</label><input id="optColor" placeholder="e.g. Cream, Teal"></div>
+        <div class="form-field"><label>Phone (optional)</label><input id="optPhone" placeholder="020..."></div>
+        <div class="form-field full"><label>Special description / request</label><textarea id="optDescription" placeholder="Anything the seller should know?"></textarea></div>
+      </div>
+      <button class="btn btn-primary checkout-btn" onclick="addSelectedToCart()">Add to Cart</button>
+    </div>
+  </div>
+
+  <div class="modal" id="checkoutModal">
+    <div class="modal-card">
+      <div class="modal-head"><h3>Customer Details</h3><button class="close-cart" onclick="closeCheckout()">✕</button></div>
+      <div class="form-grid">
+        <div class="form-field full"><label>Your name *</label><input id="customerName" placeholder="Full name"></div>
+        <div class="form-field"><label>Phone number *</label><input id="customerPhone" placeholder="020..."></div>
+        <div class="form-field"><label>Delivery area *</label><input id="customerLocation" placeholder="e.g. Madina, Accra"></div>
+        <div class="form-field full"><label>Order description / note</label><textarea id="customerNote" placeholder="Delivery instructions or anything else..."></textarea></div>
+      </div>
+      <button class="btn btn-primary checkout-btn" onclick="sendWholeOrderToWhatsApp()">Send Whole Order to WhatsApp</button>
+      <div class="cart-checkout-note">Your cart items, quantities, options and customer details will be included.</div>
+    </div>
+  </div>
+
+
+  <!-- OWNER ADMIN LOGIN -->
+  <div class="admin-modal" id="adminLoginModal" role="dialog" aria-modal="true" aria-label="Owner sign in">
+    <div class="admin-login">
+      <div style="font-size:34px;margin-bottom:8px">🔐</div>
+      <h3>Owner Admin</h3>
+      <p>Owner access only. Create a private password on first use, then sign in.</p>
+      <input id="adminPassword" type="password" placeholder="Owner password (min. 10 characters)" onkeydown="if(event.key==='Enter')loginAdmin()">
+      <button class="btn btn-primary" style="width:100%" onclick="loginAdmin()">Continue securely</button>
+      <button class="btn" style="width:100%;margin-top:7px;background:#f5f1eb;color:var(--brown)" onclick="closeAdminLogin()">Cancel</button>
+      <div id="adminLoginError" style="color:#b43e37;font-size:11px;margin-top:9px;text-align:center"></div>
+    </div>
+  </div>
+
+  <!-- OWNER ADMIN DASHBOARD -->
+  <div class="admin-modal" id="adminModal" role="dialog" aria-modal="true" aria-label="Owner dashboard">
+    <div class="admin-card">
+      <div class="admin-head">
+        <div><h2>CozyLiving GH — Admin</h2><small>Owner session · auto-locks after 10 minutes idle</small></div>
+        <button class="close-cart" onclick="closeAdmin()">✕</button>
+      </div>
+      <div class="admin-body">
+        <div class="admin-toolbar">
+          <button class="btn btn-primary" onclick="newProduct()">＋ Add Product</button>
+          <button class="btn" style="background:#f5f1eb;color:var(--brown)" onclick="exportProducts()">Export Products</button>
+          <button class="btn" style="background:#f5f1eb;color:var(--brown)" onclick="document.getElementById('importFile').click()">Import Products</button>
+          <input id="importFile" type="file" accept=".json" hidden onchange="importProducts(event)">
+          <button class="btn" style="background:#fff0ee;color:#a43d35" onclick="resetProducts()">Reset Demo Products</button>
+          <button class="btn" style="background:#2A2420;color:#fff" onclick="logoutAdmin()">Lock Dashboard</button>
+        </div>
+
+        <div class="admin-stat">
+          <div><b id="adminProductTotal">0</b>Products</div>
+          <div><b id="adminPromoTotal">0</b>Active promos</div>
+          <div><b id="adminCategoryTotal">0</b>Categories</div>
+        </div>
+
+        <div class="admin-grid">
+          <div class="admin-panel">
+            <h3>Your Products</h3>
+            <div class="admin-products" id="adminProducts"></div>
+          </div>
+
+          <div class="admin-panel">
+            <h3 id="adminFormTitle">Add Product</h3>
+            <div class="admin-note"><b>Security note:</b> This standalone HTML stores products and a password hash in this browser only. For real owner-only protection across devices, use server authentication and database permissions.<br><br>Promo tip: turn on <b>Promo Price</b>, enter the normal price and the sale price. Customers will see the old price crossed out and the new price highlighted.<br><br><b>Sizes:</b> add only the sizes you actually have for each product. Customers will see these exact choices when ordering.</div>
+            <input type="hidden" id="editIndex" value="-1">
+            <div class="admin-form-grid">
+              <div class="admin-field full"><label>Product name *</label><input id="adminName" placeholder="e.g. Luxury Cotton Bedsheet"></div>
+              <div class="admin-field"><label>Category *</label><select id="adminCategory"><option value="bedsheets">Bedsheets</option><option value="duvets">Duvets</option><option value="curtains">Curtains</option><option value="towels">Towels</option><option value="other">Other</option></select></div>
+              <div class="admin-field"><label>Normal price (GHS) *</label><input id="adminPrice" type="number" min="0" step="0.01" placeholder="250"></div>
+              <div class="admin-field"><label>Rating</label><input id="adminRating" type="number" min="0" max="5" step="0.1" placeholder="4.8"></div>
+              <div class="admin-field"><label>Reviews</label><input id="adminReviews" type="number" min="0" step="1" placeholder="20"></div>
+              <div class="admin-field full">
+                <label>Product image</label>
+                <div class="image-upload-box">
+                  <div class="image-upload-row">
+                    <button type="button" class="image-upload-btn" onclick="document.getElementById('adminImageFile').click()">📷 Choose Image From Phone</button>
+                    <button type="button" class="image-upload-clear" onclick="clearAdminImage()">Remove Image</button>
+                    <input id="adminImageFile" type="file" accept="image/*" hidden onchange="handleAdminImage(event)">
+                  </div>
+                  <img id="adminImagePreview" class="image-preview" alt="Product image preview">
+                  <input id="adminImage" type="hidden" value="">
+                  <div class="image-upload-help">Choose a photo from your phone. The image is saved inside this browser with the product.</div>
+                </div>
+              </div>
+              <div class="admin-field full"><label>Product details</label><textarea id="adminDescription" placeholder="Describe material, size, colour, what is included, etc."></textarea></div>
+              <div class="admin-field full">
+                <label>Available sizes</label>
+                <div class="size-editor">
+                  <div id="adminSizesList" class="admin-sizes-list"></div>
+                  <div class="size-add-row">
+                    <input id="newSizeInput" placeholder="e.g. King, 6x6, Large" onkeydown="if(event.key==='Enter'){event.preventDefault();addAdminSize();}">
+                    <button type="button" class="btn size-add-btn" onclick="addAdminSize()">＋ Add Size</button>
+                  </div>
+                  <small class="size-help">Add the sizes customers can choose for this product. Tap ✕ to remove a size.</small>
+                </div>
+              </div>
+              <div class="admin-field"><label>Product badge</label><input id="adminTag" placeholder="Bestseller, New, Popular"></div>
+              <div class="admin-field"><label>Promo badge</label><input id="adminPromoLabel" placeholder="SALE, 20% OFF, Weekend Deal"></div>
+              <div class="admin-field full"><label class="admin-check"><input id="adminPromo" type="checkbox" onchange="togglePromoFields()"> This product is on promo</label></div>
+              <div class="admin-field" id="promoPriceWrap" style="display:none"><label>New promo price (GHS) *</label><input id="adminPromoPrice" type="number" min="0" step="0.01" placeholder="199"></div>
+              <div class="admin-field" id="promoEndWrap" style="display:none"><label>Promo note</label><input id="adminPromoEnd" placeholder="This week only"></div>
+            </div>
+            <div class="admin-form-actions" style="display:flex;gap:8px;margin-top:5px">
+              <button class="btn btn-primary" onclick="saveProduct()">Save Product</button>
+              <button class="btn" style="background:#f5f1eb;color:var(--brown)" onclick="newProduct()">Clear</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <main id="home">
+    <div class="container">
+      <section class="hero">
+        <div class="hero-card">
+          <div class="hero-content">
+            <div class="eyebrow">✨ Premium home essentials</div>
+            <h1>Comfort & Luxury<br>For <span>Every Home</span></h1>
+            <p>Beautiful bedsheets, duvet sets, curtains and soft towels — carefully selected to make your home feel warmer, calmer and more luxurious.</p>
+            <div class="hero-buttons">
+              <a class="btn btn-primary" href="#shop">Shop Collection →</a>
+              <a class="btn btn-light" href="https://wa.me/233209494310?text=Hi%20CozyLiving%20GH%2C%20I%27d%20like%20to%20place%20an%20order.">Order on WhatsApp</a>
+            </div>
+            <div class="hero-note">✔ Multiple colours available &nbsp; ✔ Accra delivery &nbsp; ✔ Easy WhatsApp ordering</div>
+          </div>
+        </div>
+      </section>
+
+      <div class="categories" id="categoryBar">
+        <button class="category active" onclick="filterProducts('all',this)">▱ All Products</button>
+        <button class="category" onclick="filterProducts('duvets',this)">▱ Duvets</button>
+        <button class="category" onclick="filterProducts('curtains',this)">▥ Curtains</button>
+        <button class="category" onclick="filterProducts('towels',this)">▤ Towels</button>
+      </div>
+
+      <section id="shop">
+        <div class="section-head">
+          <div><div class="section-kicker">Customer favourites</div><h2 class="section-title">Shop Bestsellers</h2></div>
+          <span class="see-all" id="productCount">8 products</span>
+        </div>
+        <div style="margin-bottom:18px">
+          <input id="search" oninput="searchProducts()" placeholder="Search bedsheets, duvets, curtains..."
+            style="width:100%;padding:14px 16px;border:1px solid var(--border);border-radius:13px;background:#fff;outline:none;color:var(--text)">
+        </div>
+        <div class="products" id="products"></div>
+      </section>
+
+      <section class="trust">
+        <div class="trust-card"><div class="trust-icon">🚚</div><div><strong>Delivery in Accra</strong><span>Convenient delivery to your location</span></div></div>
+        <div class="trust-card"><div class="trust-icon">💬</div><div><strong>Order on WhatsApp</strong><span>Chat directly before you buy</span></div></div>
+        <div class="trust-card"><div class="trust-icon">✦</div><div><strong>Quality Home Essentials</strong><span>Soft, durable & affordable</span></div></div>
+      </section>
+
+      <section class="story" id="about">
+        <div class="story-image"><img src="https://images.unsplash.com/photo-1618220179428-22790b461013?auto=format&fit=crop&w=1200&q=85" alt="Beautiful cozy bedroom"></div>
+        <div>
+          <div class="section-kicker">Why CozyLiving GH</div><h2>Make your bedroom feel like your favourite place.</h2>
+          <p>From everyday comfort to a fresh new look, CozyLiving GH brings practical home essentials together in one easy-to-shop collection.</p>
+          <div class="check-list">
+            <div class="check"><b>✓</b> Duvet sets with coordinated pieces</div><div class="check"><b>✓</b> Bedsheets in different colours and styles</div>
+            <div class="check"><b>✓</b> Soft towels and beautiful curtains</div><div class="check"><b>✓</b> Simple ordering directly through WhatsApp</div>
+          </div>
+          <a class="btn btn-primary" href="https://wa.me/233209494310?text=Hi%20CozyLiving%20GH%2C%20I%20want%20to%20see%20your%20available%20colours.">Ask About Colours</a>
+        </div>
+      </section>
+
+      <section class="cta" id="contact">
+        <div><h2>Ready to make your home cozier?</h2><p>Tell us what you need, your preferred colour and your location.</p></div>
+        <a class="btn" href="https://wa.me/233209494310?text=Hi%20CozyLiving%20GH%2C%20I%27d%20like%20to%20order.%20Product%3A%20%20Colour%3A%20%20Location%3A%20">💬 Chat on WhatsApp</a>
+      </section>
+    </div>
+  </main>
+
+  <footer>
+    <div class="container"><div class="footer-grid">
+      <div><h3>CozyLiving GH</h3><p>Comfort, quality and beautiful home essentials for cozy Ghanaian homes.</p></div>
+      <div><h3>Shop</h3><div class="footer-links"><a href="#shop">Bedsheets</a><a href="#shop">Duvets</a><a href="#shop">Curtains</a><a href="#shop">Towels</a></div></div>
+      <div><h3>Contact</h3><div class="footer-links"><a href="https://wa.me/233209494310">WhatsApp: 020 949 4310</a><a href="#contact">Delivery in Accra</a></div></div>
+    </div><div class="copyright">© 2026 CozyLiving GH. All rights reserved.</div></div>
+  </footer>
+
+  <button class="floating-wa" onclick="openCart()">🛒 View Cart & Order</button>
+  <div class="toast" id="toast"></div>
+
+  <script>
+    const DEFAULT_PRODUCTS = [
+      {name:"Linen Beige Bedsheet Set",category:"bedsheets",price:250,promoPrice:null,rating:"4.8",reviews:"42",tag:"Bestseller",promoLabel:"",promoNote:"",image:"images/img1.jpg",description:"Soft, comfortable bedsheet set for everyday use.",sizes:["Single","Double","Queen","King"]},
+      {name:"Cotton Stripe Bedsheet",category:"bedsheets",price:300,promoPrice:null,rating:"4.9",reviews:"31",tag:"Popular",promoLabel:"",promoNote:"",image:"images/img2.jpg",description:"Comfortable cotton bedsheet with a clean stripe design.",sizes:["Single","Double","Queen","King"]},
+      {name:"Classic Cream Bedsheet",category:"bedsheets",price:250,promoPrice:null,rating:"4.7",reviews:"28",tag:"",promoLabel:"",promoNote:"",image:"images/img3.jpg",description:"Classic cream colour for a calm bedroom look.",sizes:["Single","Double","Queen","King"]},
+      {name:"Textured Beige Bedsheet",category:"bedsheets",price:300,promoPrice:null,rating:"4.8",reviews:"35",tag:"",promoLabel:"",promoNote:"",image:"images/img4.jpg",description:"Textured finish with a warm neutral tone.",sizes:["Single","Double","Queen","King"]},
+      {name:"Soft Luxury Duvet Set",category:"duvets",price:420,promoPrice:null,rating:"4.9",reviews:"24",tag:"New",promoLabel:"",promoNote:"",image:"images/img5.jpg",description:"Luxury duvet set designed for a soft and cozy bedroom.",sizes:["Single","Double","Queen","King"]},
+      {name:"Elegant Window Curtains",category:"curtains",price:280,promoPrice:null,rating:"4.8",reviews:"19",tag:"Popular",promoLabel:"",promoNote:"",image:"images/img6.jpg",description:"Elegant curtains for bedrooms and living spaces.",sizes:["Small","Medium","Large"]},
+      {name:"Premium Soft Towels",category:"towels",price:180,promoPrice:null,rating:"4.8",reviews:"27",tag:"",promoLabel:"",promoNote:"",image:"images/img2.jpg",description:"Soft towels for comfortable everyday use.",sizes:["Small","Medium","Large"]},
+      {name:"Cream & Teal Duvet Set",category:"duvets",price:450,promoPrice:null,rating:"5.0",reviews:"16",tag:"Featured",promoLabel:"",promoNote:"",image:"images/img4.jpg",description:"Beautiful cream and teal duvet set.",sizes:["Single","Double","Queen","King"]}
+    ];
+
+    let PRODUCTS = JSON.parse(localStorage.getItem("cozyLivingProducts") || "null") || DEFAULT_PRODUCTS;
+    PRODUCTS=PRODUCTS.map(p=>{
+      if(Array.isArray(p.sizes))return p;
+      const category=p.category||"other";
+      return {...p,sizes:category==="bedsheets"||category==="duvets"?["Single","Double","Queen","King"]:category==="curtains"||category==="towels"?["Small","Medium","Large"]:[]};
+    });
+    saveProductsToStorage();
+    let activeCategory="all", cart=[], selectedProductIndex=null, toastTimer;
+    let adminLoggedIn=sessionStorage.getItem("cozyOwnerSession")==="active";
+    const OWNER_HASH_KEY="cozyOwnerPasswordHash";
+    let loginFailures=0, lockUntil=0, ownerIdleTimer=null;
+    const OWNER_IDLE_MS=10*60*1000;
+    async function hashOwnerPassword(value){
+      const digest=await crypto.subtle.digest("SHA-256",new TextEncoder().encode(value));
+      return Array.from(new Uint8Array(digest)).map(b=>b.toString(16).padStart(2,"0")).join("");
+    }
+    function touchOwnerSession(){
+      if(!adminLoggedIn)return;
+      clearTimeout(ownerIdleTimer);
+      ownerIdleTimer=setTimeout(()=>logoutAdmin(true),OWNER_IDLE_MS);
+    }
+    ["click","keydown","touchstart"].forEach(type=>document.addEventListener(type,touchOwnerSession,{passive:true}));
+
+    function saveProductsToStorage(){
+      localStorage.setItem("cozyLivingProducts",JSON.stringify(PRODUCTS));
+    }
+    function productPrice(p){return Number(p.promoPrice)>0?Number(p.promoPrice):Number(p.price)||0}
+
+    function renderProducts(){
+      const search=document.getElementById("search").value.toLowerCase().trim();
+      const filtered=PRODUCTS.filter(p=>{
+        const categoryMatch=activeCategory==="all"||p.category===activeCategory;
+        const searchMatch=!search||(p.name+" "+p.category+" "+(p.description||"")).toLowerCase().includes(search);
+        return categoryMatch&&searchMatch;
+      });
+      document.getElementById("productCount").textContent=filtered.length+" product"+(filtered.length===1?"":"s");
+      const box=document.getElementById("products");
+      box.innerHTML=filtered.length?filtered.map(p=>{
+        const onSale=Number(p.promoPrice)>0 && Number(p.promoPrice)<Number(p.price);
+        return `<article class="product">
+          <div class="product-image">
+            <img src="${p.image}" alt="${p.name}" loading="lazy">
+            ${p.tag?`<span class="tag">${p.tag}</span>`:""}
+            ${onSale?`<span class="sale-badge">${p.promoLabel||"SALE"}</span>`:""}
+            <button class="heart" onclick="showToast('Saved ${p.name.replace(/'/g,"\\'")}')">♡</button>
+          </div>
+          <div class="product-body">
+            <div class="product-cat">${p.category}</div>
+            <h3 title="${p.name}">${p.name}</h3>
+            <div><span class="stars">★★★★★</span><span class="rating">${p.rating||"5.0"} (${p.reviews||0})</span></div>
+            ${p.description?`<div style="font-size:11px;color:var(--muted);margin-top:5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis" title="${p.description}">${p.description}</div>`:""}
+            <div class="product-bottom">
+              <div>${onSale?`<span class="old-price">${formatMoney(Number(p.price))}</span><span class="sale-price">${formatMoney(Number(p.promoPrice))}</span>`:`<div class="price">${formatMoney(Number(p.price))}</div>`}</div>
+              <button class="order-mini" onclick="openProductModal(${PRODUCTS.indexOf(p)})">Add to Cart</button>
+            </div>
+          </div>
+        </article>`;
+      }).join(""):`<div class="no-products">No products found. Try another search.</div>`;
+    }
+
+    function filterProducts(category,button){
+      activeCategory=category;
+      document.querySelectorAll(".category").forEach(b=>b.classList.remove("active"));
+      button.classList.add("active");renderProducts();
+      document.getElementById("shop").scrollIntoView({behavior:"smooth",block:"start"});
+    }
+    function searchProducts(){
+      activeCategory="all";
+      document.querySelectorAll(".category").forEach(b=>b.classList.remove("active"));
+      document.querySelector(".category").classList.add("active");renderProducts();
+    }
+    function getProductSizes(p){
+      const sizes=Array.isArray(p?.sizes)?p.sizes:[];
+      return sizes.map(s=>String(s).trim()).filter(Boolean);
+    }
+
+    function renderCustomerSizes(p){
+      const select=document.getElementById("optSize");
+      const sizes=getProductSizes(p);
+      select.innerHTML='<option value="">Select size</option>'+sizes.map(size=>`<option value="${size.replace(/"/g,'&quot;')}">${size}</option>`).join("");
+      select.disabled=!sizes.length;
+      if(!sizes.length)select.innerHTML='<option value="">No size options</option>';
+      let note=document.getElementById("customerSizeNote");
+      if(!note){
+        note=document.createElement("div");
+        note.id="customerSizeNote";
+        note.className="customer-size-note";
+        select.parentElement.appendChild(note);
+      }
+      note.textContent=sizes.length?"Choose from the sizes set by the owner.":"This product has no size options.";
+    }
+
+    function renderAdminSizes(sizes){
+      const box=document.getElementById("adminSizesList");
+      if(!box)return;
+      const clean=[...new Set((Array.isArray(sizes)?sizes:[]).map(s=>String(s).trim()).filter(Boolean))];
+      box.innerHTML=clean.length?clean.map((size,i)=>`<span class="admin-size-chip">${size.replace(/</g,"&lt;").replace(/>/g,"&gt;")}<button type="button" aria-label="Remove ${size}" onclick="removeAdminSize(${i})">✕</button></span>`).join(""):'<span style="font-size:11px;color:var(--muted)">No sizes added yet.</span>';
+      box.dataset.sizes=JSON.stringify(clean);
+    }
+
+    function getAdminSizes(){
+      const box=document.getElementById("adminSizesList");
+      try{return JSON.parse(box?.dataset.sizes||"[]");}catch(e){return [];}
+    }
+
+    function addAdminSize(){
+      const input=document.getElementById("newSizeInput");
+      const value=input.value.trim();
+      if(!value)return;
+      const sizes=getAdminSizes();
+      if(sizes.some(s=>s.toLowerCase()===value.toLowerCase())){showToast("That size is already added.");return;}
+      sizes.push(value);
+      renderAdminSizes(sizes);
+      input.value="";
+      input.focus();
+    }
+
+    function removeAdminSize(index){
+      const sizes=getAdminSizes();
+      sizes.splice(index,1);
+      renderAdminSizes(sizes);
+    }
+
+    function openProductModal(index){
+      selectedProductIndex=index;const p=PRODUCTS[index];
+      document.getElementById("selectedProduct").innerHTML=`<strong>${p.name}</strong><br><span>${Number(p.promoPrice)>0&&Number(p.promoPrice)<Number(p.price)?`<span class="old-price">${formatMoney(Number(p.price))}</span><span class="sale-price">${formatMoney(Number(p.promoPrice))}</span>`:formatMoney(Number(p.price))} each • ${p.category}</span>${p.description?`<br><small style="color:var(--muted)">${p.description}</small>`:""}`;
+      document.getElementById("optQty").value=1;
+      renderCustomerSizes(p);
+      document.getElementById("optSize").value="";
+      document.getElementById("optColor").value="";document.getElementById("optDescription").value="";
+      document.getElementById("productModal").classList.add("show");
+    }
+    function closeProductModal(){document.getElementById("productModal").classList.remove("show");selectedProductIndex=null}
+    function addSelectedToCart(){
+      if(selectedProductIndex===null)return;
+      const p=PRODUCTS[selectedProductIndex],qty=Math.max(1,parseInt(document.getElementById("optQty").value)||1);
+      const size=document.getElementById("optSize").value,color=document.getElementById("optColor").value.trim(),description=document.getElementById("optDescription").value.trim();
+      const key=[p.name,size,color,description].join("|"),existing=cart.find(i=>i.key===key);
+      if(existing)existing.qty+=qty;else cart.push({key,name:p.name,price:productPrice(p),image:p.image,qty,size,color,description});
+      closeProductModal();updateCart();openCart();showToast("Added to cart ✓");
+    }
+    function priceNumber(price){return Number(String(price).replace(/[^\d.]/g,""))||0}
+    function formatMoney(n){return"GHS "+n.toLocaleString("en-GH",{minimumFractionDigits:0,maximumFractionDigits:2})}
+    function updateCart(){
+      const count=cart.reduce((s,i)=>s+i.qty,0),total=cart.reduce((s,i)=>s+priceNumber(i.price)*i.qty,0);
+      document.getElementById("cartCount").textContent=count;document.getElementById("cartTitleCount").textContent=`(${count})`;document.getElementById("cartTotal").textContent=formatMoney(total);
+      const box=document.getElementById("cartItems");
+      if(!cart.length){box.innerHTML=`<div class="empty-cart"><div style="font-size:40px">🛒</div><p>Your cart is empty.</p><small>Add products and they will appear here.</small></div>`;return}
+      box.innerHTML=cart.map((item,index)=>`
+        <div class="cart-item"><div class="cart-item-top"><img src="${item.image}" alt="${item.name}"><div style="flex:1"><h4>${item.name}</h4>
+        <div class="cart-meta">${item.size?"Size: "+item.size+" • ":""}${item.color?"Colour: "+item.color:""}</div>
+        ${item.description?`<div class="cart-meta">Note: ${item.description}</div>`:""}<div class="cart-meta">${formatMoney(priceNumber(item.price))} each</div></div></div>
+        <div class="qty-row"><div class="qty-controls"><button onclick="changeQty(${index},-1)">−</button><span>${item.qty}</span><button onclick="changeQty(${index},1)">+</button></div>
+        <strong>${formatMoney(priceNumber(item.price)*item.qty)}</strong><button class="remove-item" onclick="removeCartItem(${index})">Remove</button></div></div>`).join("");
+    }
+    function changeQty(index,delta){cart[index].qty+=delta;if(cart[index].qty<=0)cart.splice(index,1);updateCart()}
+    function removeCartItem(index){cart.splice(index,1);updateCart()}
+    function openCart(){updateCart();document.getElementById("cartDrawer").classList.add("show");document.getElementById("cartOverlay").classList.add("show");document.body.classList.add("cart-open")}
+    function closeCart(){document.getElementById("cartDrawer").classList.remove("show");document.getElementById("cartOverlay").classList.remove("show");document.body.classList.remove("cart-open")}
+    function openCheckout(){if(!cart.length){showToast("Add at least one product first.");return}closeCart();document.getElementById("checkoutModal").classList.add("show")}
+    function closeCheckout(){document.getElementById("checkoutModal").classList.remove("show")}
+    function sendWholeOrderToWhatsApp(){
+      const name=document.getElementById("customerName").value.trim(),phone=document.getElementById("customerPhone").value.trim(),location=document.getElementById("customerLocation").value.trim(),note=document.getElementById("customerNote").value.trim();
+      if(!name||!phone||!location){showToast("Please fill in name, phone and delivery area.");return}
+      let total=0,message=`Hi CozyLiving GH, I would like to place an order.%0A%0ACUSTOMER DETAILS%0AName: ${encodeURIComponent(name)}%0APhone: ${encodeURIComponent(phone)}%0ADelivery area: ${encodeURIComponent(location)}%0A`;
+      if(note)message+=`Note: ${encodeURIComponent(note)}%0A`;
+      message+=`%0AORDER%0A`;
+      cart.forEach((item,i)=>{const lineTotal=priceNumber(item.price)*item.qty;total+=lineTotal;message+=`${i+1}. ${encodeURIComponent(item.name)} x${item.qty} — ${encodeURIComponent(formatMoney(lineTotal))}%0A`;if(item.size)message+=`   Size: ${encodeURIComponent(item.size)}%0A`;if(item.color)message+=`   Colour: ${encodeURIComponent(item.color)}%0A`;if(item.description)message+=`   Description: ${encodeURIComponent(item.description)}%0A`});
+      message+=`%0ATOTAL: ${encodeURIComponent(formatMoney(total))}%0A%0APlease confirm availability and delivery details.`;
+      window.open("https://wa.me/233209494310?text="+message,"_blank");
+    }
+
+    function openAdminLogin(){
+      document.getElementById("adminPassword").value="";
+      document.getElementById("adminLoginError").textContent="";
+      document.getElementById("adminLoginModal").classList.add("show");
+      setTimeout(()=>document.getElementById("adminPassword").focus(),50);
+    }
+    function closeAdminLogin(){document.getElementById("adminLoginModal").classList.remove("show")}
+    async function loginAdmin(){
+      const field=document.getElementById("adminPassword"), error=document.getElementById("adminLoginError");
+      const password=field.value;
+      if(Date.now()<lockUntil){error.textContent="Too many attempts. Wait a minute and try again.";return;}
+      if(!password){error.textContent="Enter your owner password.";return;}
+      if(!window.crypto?.subtle){error.textContent="Password setup requires a modern browser over HTTPS.";return;}
+      try{
+        let stored=localStorage.getItem(OWNER_HASH_KEY);
+        if(!stored){
+          if(password.length<10){error.textContent="Create a password with at least 10 characters.";return;}
+          const confirmation=prompt("First-time setup: re-enter your new owner password.");
+          if(confirmation!==password){error.textContent="Passwords did not match.";return;}
+          stored=await hashOwnerPassword(password);localStorage.setItem(OWNER_HASH_KEY,stored);
+        }else if(await hashOwnerPassword(password)!==stored){
+          loginFailures++;
+          if(loginFailures>=5){lockUntil=Date.now()+60000;loginFailures=0;}
+          error.textContent="Incorrect password.";field.value="";field.focus();return;
+        }
+        loginFailures=0;adminLoggedIn=true;sessionStorage.setItem("cozyOwnerSession","active");
+        touchOwnerSession();closeAdminLogin();openAdmin();
+      }catch(e){error.textContent="Could not verify password. Please try again.";}
+    }
+    function openAdmin(){
+      if(!adminLoggedIn)return openAdminLogin();
+      touchOwnerSession();renderAdminProducts();document.getElementById("adminModal").classList.add("show");
+    }
+    function closeAdmin(){document.getElementById("adminModal").classList.remove("show")}
+    function logoutAdmin(auto=false){
+      adminLoggedIn=false;sessionStorage.removeItem("cozyOwnerSession");clearTimeout(ownerIdleTimer);
+      closeAdmin();if(!auto)showToast("Admin dashboard locked.");
+    }
+    function togglePromoFields(){
+      const show=document.getElementById("adminPromo").checked;
+      document.getElementById("promoPriceWrap").style.display=show?"block":"none";
+      document.getElementById("promoEndWrap").style.display=show?"block":"none";
+    }
+    function renderAdminProducts(){
+      const box=document.getElementById("adminProducts");
+      box.innerHTML=PRODUCTS.length?PRODUCTS.map((p,i)=>{
+        const sale=Number(p.promoPrice)>0&&Number(p.promoPrice)<Number(p.price);
+        return `<div class="admin-product">
+          <img src="${p.image}" alt="">
+          <div class="admin-product-info"><strong>${p.name}</strong><span>${p.category} • ${sale?formatMoney(p.promoPrice)+" promo":"GHS "+Number(p.price).toLocaleString("en-GH")}</span></div>
+          <div class="admin-product-actions"><button class="edit-btn" onclick="editProduct(${i})">Edit</button><button class="delete-btn" onclick="deleteProduct(${i})">Delete</button></div>
+        </div>`;
+      }).join(""):'<div class="no-products">No products yet. Add your first product.</div>';
+      document.getElementById("adminProductTotal").textContent=PRODUCTS.length;
+      document.getElementById("adminPromoTotal").textContent=PRODUCTS.filter(p=>Number(p.promoPrice)>0&&Number(p.promoPrice)<Number(p.price)).length;
+      document.getElementById("adminCategoryTotal").textContent=new Set(PRODUCTS.map(p=>p.category)).size;
+    }
+
+    function handleAdminImage(event){
+      const file=event.target.files[0];
+      if(!file)return;
+      if(!file.type.startsWith("image/")){showToast("Please choose an image file.");return}
+      const reader=new FileReader();
+      reader.onload=()=>{
+        document.getElementById("adminImage").value=reader.result;
+        showAdminImagePreview(reader.result);
+        showToast("Image selected ✓");
+      };
+      reader.readAsDataURL(file);
+      event.target.value="";
+    }
+    function showAdminImagePreview(src){
+      const preview=document.getElementById("adminImagePreview");
+      if(!preview)return;
+      if(src){preview.src=src;preview.classList.add("show")}
+      else{preview.removeAttribute("src");preview.classList.remove("show")}
+    }
+    function clearAdminImage(){
+      document.getElementById("adminImage").value="";
+      showAdminImagePreview("");
+    }
+
+    function newProduct(){
+      document.getElementById("editIndex").value=-1;
+      document.getElementById("adminFormTitle").textContent="Add Product";
+      ["adminName","adminPrice","adminRating","adminReviews","adminImage","adminDescription","adminTag","adminPromoLabel","adminPromoPrice","adminPromoEnd","newSizeInput"].forEach(id=>document.getElementById(id).value="");
+      renderAdminSizes([]);
+      document.getElementById("adminCategory").value="bedsheets";
+      showAdminImagePreview("");
+      document.getElementById("adminPromo").checked=false;togglePromoFields();
+    }
+    function editProduct(i){
+      const p=PRODUCTS[i];
+      document.getElementById("editIndex").value=i;
+      document.getElementById("adminFormTitle").textContent="Edit Product";
+      document.getElementById("adminName").value=p.name||"";
+      document.getElementById("adminCategory").value=p.category||"other";
+      document.getElementById("adminPrice").value=p.price||"";
+      document.getElementById("adminRating").value=p.rating||"";
+      document.getElementById("adminReviews").value=p.reviews||"";
+      document.getElementById("adminImage").value=p.image||"";
+      showAdminImagePreview(p.image||"");
+      document.getElementById("adminDescription").value=p.description||"";
+      renderAdminSizes(getProductSizes(p));
+      document.getElementById("newSizeInput").value="";
+      document.getElementById("adminTag").value=p.tag||"";
+      document.getElementById("adminPromoLabel").value=p.promoLabel||"";
+      document.getElementById("adminPromo").checked=Number(p.promoPrice)>0;
+      document.getElementById("adminPromoPrice").value=p.promoPrice||"";
+      document.getElementById("adminPromoEnd").value=p.promoNote||"";
+      togglePromoFields();
+      document.getElementById("adminFormTitle").scrollIntoView({behavior:"smooth",block:"start"});
+    }
+    function saveProduct(){
+      const name=document.getElementById("adminName").value.trim();
+      const price=Number(document.getElementById("adminPrice").value);
+      if(!name||!Number.isFinite(price)||price<=0){showToast("Enter a product name and a price greater than zero.");return}
+      const promoOn=document.getElementById("adminPromo").checked;
+      const promoPrice=Number(document.getElementById("adminPromoPrice").value);
+      if(promoOn&&(!promoPrice||promoPrice<=0||promoPrice>=price)){showToast("Promo price must be lower than the normal price.");return}
+      const product={
+        name,category:document.getElementById("adminCategory").value,price,
+        promoPrice:promoOn?promoPrice:null,
+        rating:document.getElementById("adminRating").value||"5.0",
+        reviews:document.getElementById("adminReviews").value||"0",
+        image:document.getElementById("adminImage").value.trim()||"https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?auto=format&fit=crop&w=800&q=80",
+        description:document.getElementById("adminDescription").value.trim(),
+        sizes:getAdminSizes(),
+        tag:document.getElementById("adminTag").value.trim(),
+        promoLabel:document.getElementById("adminPromoLabel").value.trim(),
+        promoNote:document.getElementById("adminPromoEnd").value.trim()
+      };
+      const i=Number(document.getElementById("editIndex").value);
+      if(i>=0)PRODUCTS[i]=product;else PRODUCTS.push(product);
+      saveProductsToStorage();renderProducts();renderAdminProducts();newProduct();showToast(i>=0?"Product updated ✓":"Product added ✓");
+    }
+    function deleteProduct(i){
+      if(!confirm(`Delete "${PRODUCTS[i].name}"?`))return;
+      PRODUCTS.splice(i,1);saveProductsToStorage();renderProducts();renderAdminProducts();showToast("Product deleted.");
+    }
+    function resetProducts(){
+      if(!confirm("Reset all products to the original demo products?"))return;
+      PRODUCTS=JSON.parse(JSON.stringify(DEFAULT_PRODUCTS));saveProductsToStorage();renderProducts();renderAdminProducts();showToast("Demo products restored.");
+    }
+    function exportProducts(){
+      const blob=new Blob([JSON.stringify(PRODUCTS,null,2)],{type:"application/json"});
+      const a=document.createElement("a");a.href=URL.createObjectURL(blob);a.download="cozyliving-products.json";a.click();URL.revokeObjectURL(a.href);
+    }
+    function importProducts(event){
+      const file=event.target.files[0];if(!file)return;
+      const reader=new FileReader();
+      reader.onload=()=>{try{
+        const data=JSON.parse(reader.result);
+        if(!Array.isArray(data))throw new Error();
+        PRODUCTS=data;saveProductsToStorage();renderProducts();renderAdminProducts();showToast("Products imported ✓");
+      }catch(e){showToast("Invalid product file.");}};
+      reader.readAsText(file);event.target.value="";
+    }
+
+    function toggleMobileMenu(){document.getElementById("mobileMenu").classList.toggle("show")}
+    document.addEventListener("keydown",e=>{if(e.key==="Escape"){closeAdmin();closeAdminLogin();closeProductModal();closeCheckout();}});
+    function showToast(message){const toast=document.getElementById("toast");toast.textContent=message;toast.classList.add("show");clearTimeout(toastTimer);toastTimer=setTimeout(()=>toast.classList.remove("show"),2400)}
+    renderProducts();updateCart();
+  </script>
+
+  <!-- OWNER-ONLY ACCESS ENTRY -->
+<div class="admin-access-bottom" aria-label="Business owner access">
+  <button type="button" class="admin-access-btn" onclick="openAdminLogin()">
+    CozyLiving GH
+  </button>
+</div>
+
+<style>
+  .admin-access-bottom{
+    position:fixed;
+    left:10px;
+    bottom:calc(3cm + env(safe-area-inset-bottom));
+    width:auto;
+    padding:0;
+    margin:0;
+    background:transparent;
+    border:0;
+    z-index:70;
+  }
+
+  .admin-access-btn{
+    appearance:none;
+    border:0;
+    background:transparent;
+    color:#746B63;
+    font-size:11px;
+    font-weight:600;
+    padding:3px 5px;
+    min-height:auto;
+    border-radius:0;
+    cursor:pointer;
+    box-shadow:none;
+    opacity:.65;
+  }
+
+  .admin-access-btn:hover{
+    background:transparent;
+    color:#3D2B20;
+    transform:none;
+    opacity:1;
+  }
+
+  .admin-access-btn:focus-visible{
+    outline:2px solid #2a9d92;
+    outline-offset:3px;
+  }
+</style>
+
+
+  <script>
+    (function(){
+      const adminModal = document.getElementById("adminModal");
+      if (!adminModal) return;
+
+      function enforceAdminLock(){
+        const authenticated =
+          sessionStorage.getItem("cozyOwnerSession") === "active" &&
+          typeof adminLoggedIn !== "undefined" &&
+          adminLoggedIn === true;
+
+        if (!authenticated) {
+          adminModal.classList.remove("show");
+          adminModal.setAttribute("aria-hidden","true");
+        } else {
+          adminModal.setAttribute("aria-hidden","false");
+        }
+      }
+
+      enforceAdminLock();
+      window.addEventListener("storage", enforceAdminLock);
+    })();
+  </script>
+
+</body>
+</html>
