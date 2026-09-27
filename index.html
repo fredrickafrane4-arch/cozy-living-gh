@@ -871,56 +871,11 @@
     renderProducts();updateCart();
   </script>
 
-  <!-- OWNER-ONLY ACCESS ENTRY -->
-<div class="admin-access-bottom" aria-label="Business owner access">
-  <button type="button" class="admin-access-btn" onclick="openAdminLogin()">
-    CozyLiving GH
-  </button>
-</div>
-
-<style>
-  .admin-access-bottom{
-    position:fixed;
-    left:10px;
-    bottom:calc(3cm + env(safe-area-inset-bottom));
-    width:auto;
-    padding:0;
-    margin:0;
-    background:transparent;
-    border:0;
-    z-index:70;
-  }
-
-  .admin-access-btn{
-    appearance:none;
-    border:0;
-    background:transparent;
-    color:#746B63;
-    font-size:11px;
-    font-weight:600;
-    padding:3px 5px;
-    min-height:auto;
-    border-radius:0;
-    cursor:pointer;
-    box-shadow:none;
-    opacity:.65;
-  }
-
-  .admin-access-btn:hover{
-    background:transparent;
-    color:#3D2B20;
-    transform:none;
-    opacity:1;
-  }
-
-  .admin-access-btn:focus-visible{
-    outline:2px solid #2a9d92;
-    outline-offset:3px;
-  }
-</style>
-
-
   <script>
+    if(location.hash=='#admin')openAdminLogin()
+    addEventListener('hashchange',()=>{if(location.hash=='#admin')openAdminLogin()})
+  </script>
+      
     (function(){
       const adminModal = document.getElementById("adminModal");
       if (!adminModal) return;
